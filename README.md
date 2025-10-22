@@ -1,16 +1,39 @@
-# React + Vite
+# 🎬 MovieApp | Proyecto React (Informatorio - Entrega 1)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es el proyecto base para el **Informatorio - Chaco** de la especialidad **React**. Se trata de una aplicación web minimalista para visualizar y gestionar un catálogo de películas y series, con un diseño inspirado en la estética moderna de plataformas de *streaming*.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Características Principales
 
-## React Compiler
+* **Tecnología Base:** Desarrollado con **Vite** y **React**.
+* **Diseño Modular:** Uso de **Componentes Funcionales** (`Navbar`, `MovieCard`, `Container`).
+* **Contenedores Reutilizables:** Implementación de un componente `Container` utilizando la prop `children`.
+* **Renderizado de Listas:** Se muestran las películas usando la función `map` de JavaScript para renderizar el listado.
+* **Estilos Personalizados:** Estilos CSS ajustados para lograr una coherencia visual simple y un diseño **responsivo** (adaptable a móvil/PC).
+* **Gestión de Datos:** Los datos de las películas se obtienen desde una API externa (The Movie Database - TMDB) usando **Axios**.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Configuración y Uso
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Para ejecutar el proyecto localmente, sigue estos pasos:
+
+1.  Clona el repositorio:
+    ```bash
+    git clone [https://github.com/EzequielEdOjeda/MovieApp.git](https://github.com/EzequielEdOjeda/MovieApp.git)
+    ```
+2.  Instala las dependencias:
+    ```bash
+    npm install
+    ```
+3.  Inicia la aplicación en modo desarrollo:
+    ```bash
+    npm run dev
+    ```
+
+El proyecto estará disponible en `http://localhost:5173/` (o el puerto que indique Vite).
+
+---
+
+**¡Gracias por visitar el repositorio!** 🚀
