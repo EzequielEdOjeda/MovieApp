@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/movie-icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MovieApp</title>
+  <style>
+    /* Estilos para el video de fondo */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw; 
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1; /* Mantiene el video detr¨¢s del contenido */
+    }
+    
+    /* Asegura que el contenido est¨¦ sobre el video */
+    #root {
+      position: relative;
+      z-index: 1;
+      min-height: 200vh; 
+      background-color: transparent; /* Para ver el video de fondo */
+    }
+  </style>
+</head>
+  <body>
+    <video 
+      id="bg-video" 
+      src="video.mp4" 
+      autoplay 
+      loop 
+      muted 
+      playsinline
+      poster="https://placehold.co/600x600/000/fff?text=MovieApp+Cargando..."
+    ></video>
+	<audio id="bg-audio" loop muted autoplay>
+        <!-- Fuente de audio de ejemplo -->
+        <source src="audio.mp3" type="audio/mp3">
+    </audio>
+    <div id="root"></div>
+     <!-- Botón de control de volumen que aparecer¨¢ al hacer scroll -->
+   <button id="volume-toggle" class="volume-toggle" aria-label="Activar sonido" style="opacity: 0; visibility: hidden;">??</button>
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('bg-video');
+            const audio = document.getElementById('bg-audio');
+            const volumeButton = document.getElementById('volume-toggle');
+
+            if (!video || !audio || !volumeButton) return;
+            
+            let isMuted = true;
+            let wasManuallyControlled = false; // Indica si el usuario ha interactuado con el botón
+
+            // Función para cambiar la visibilidad usando display
+            const setButtonVisible = (isVisible) => {
+                volumeButton.style.display = isVisible ? 'flex' : 'none';
+            };
+
+            // Función para actualizar el estado visual del botón y el estado del AUDIO
+            const updateButtonState = (muted) => {
+                volumeButton.innerHTML = muted ? '??' : '??'; 
+                volumeButton.setAttribute('aria-label', muted ? 'Activar sonido' : 'Silenciar sonido');
+                isMuted = muted;
+                audio.muted = muted; // Controla el silencio del audio
+            };
+            
+            // Función para sincronizar el estado del audio con el botón
+            const syncAudioState = () => {
+                const scrollY = window.scrollY;
+                
+                if (audio.paused || audio.muted || wasManuallyControlled || scrollY > 50) {
+                    setButtonVisible(true);
+                } else {
+                    setButtonVisible(false);
+                }
+                
+                // Actualizar el ícono: siempre mostrar '??' si está silenciado o pausado.
+                updateButtonState(audio.muted || audio.paused); 
+            };
+
+            // Lógica de Scroll
+            const handleScroll = () => {
+                const scrollY = window.scrollY;
+                
+                // --- SCROLL DOWN (Umbral de 50px) ---
+                if (scrollY > 50) {
+                    // Si el control NO es manual, se activa el audio automáticamente
+                    if (!wasManuallyControlled) {
+                        // 1. Desmutear y actualizar el estado
+                        updateButtonState(false); 
+                        // 2. Intentamos reproducir el audio
+                        audio.play().catch(e => console.error("Error al reproducir audio:", e));
+                    }
+                    // Si el audio está activo por scroll o manualmente, el botón es visible
+                    setButtonVisible(true);
+
+                } 
+                
+                // --- SCROLL UP (Regreso al inicio) ---
+                else {
+                    // Solo pausamos y ocultamos si el control NO fue tomado por el usuario
+                    if (!wasManuallyControlled) {
+                        audio.pause(); // Pausar el audio
+                        setButtonVisible(false); // Ocultar el botón
+                    } 
+                    // Si fue controlado manualmente, mantenemos su estado (visible o no, muted o no)
+                }
+                
+                // Después de la lógica de scroll, sincronizar el estado visual del botón
+                syncAudioState();
+            };
+            
+            // Lógica de Click en el Botón (Control Manual)
+            volumeButton.addEventListener('click', () => {
+                wasManuallyControlled = true; 
+                
+                // Si el audio está pausado o silenciado, lo activamos
+                if (audio.paused || audio.muted) {
+                    audio.muted = false; // Desmutear
+                    isMuted = false;
+                    audio.play().catch(e => console.error("Error al reproducir audio:", e));
+                    updateButtonState(false); // Mostrar '??'
+                } else {
+                    // Si está activo, lo silenciamos
+                    updateButtonState(true); // Mostrar '??'
+                    // No pausamos el audio, solo lo silenciamos, para que siga cargado y listo
+                }
+
+                // El botón DEBE ser visible permanentemente tras la interacción manual
+                setButtonVisible(true);
+            });
+
+            // LÓGICA CLAVE: Si el audio se PAUSA por cualquier razón (ej. limitación del navegador), el botón debe aparecer.
+            audio.addEventListener('pause', () => {
+                // Siempre que el audio se pause, forzamos la visibilidad y mostramos el icono de "activar"
+                setButtonVisible(true);
+                updateButtonState(true); // El icono siempre será '??' (activar sonido) si está pausado
+            });
+            
+            // Lógica: Si el audio empieza a reproducirse, sincronizamos el botón
+            audio.addEventListener('play', () => syncAudioState());
+
+            // Conexión de los eventos
+            window.addEventListener('scroll', handleScroll);
+            
+            // Ejecutar handleScroll en el inicio
+            handleScroll();
+        });
+    </script>
+  </body>
+</html>

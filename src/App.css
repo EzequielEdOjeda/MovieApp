@@ -1,0 +1,160 @@
+/* ==== GENERAL ==== */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* ==== CONTENEDOR PRINCIPAL ==== */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  /* Centrado correcto en PC */
+  margin: 2rem auto; 
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+/* ==== GRID DE PELÍCULAS (AJUSTADO PARA PC) ==== */
+.movies-grid {
+  display: grid;
+  /* Permite 5-6 columnas en PC. Un min-width más bajo (200px) asegura más densidad. */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 1.5rem; /* Espacio más compacto */
+  width: 100%;
+  justify-items: center;
+}
+
+.card {
+  background-color: transparent; /* Fondo transparente para un look más limpio */
+  border-radius: 4px; 
+  overflow: hidden;
+  text-align: center; /* Títulos al centro */
+  box-shadow: none; /* Quitamos la sombra fuerte */
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%;
+}
+
+.card:hover {
+  /* Efecto de 'pop' y sombra roja sutil */
+  transform: scale(1.05); 
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.4); 
+  z-index: 10;
+}
+
+.card img {
+  width: 100%;
+  /* Altura de póster más estándar */
+  height: 350px; 
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.card h3 {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  padding: 0 0.2rem;
+}
+
+.card p {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin: 0;
+  padding: 0 0.2rem;
+}
+
+.card small {
+  color: #777;
+  font-size: 0.75rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  padding: 0 0.2rem;
+}
+
+/* ==== ANIMACIÓN OPCIONAL ==== */
+.card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==== RESPONSIVE (AJUSTADO) ==== */
+@media (max-width: 992px) {
+  /* ... */
+  .movies-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .card img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* ... */
+  .movies-grid {
+    /* Mantenemos una buena densidad en móviles */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.8rem;
+  }
+  .card img {
+    height: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+/* --------------------------------- */
+/* ==== ANIMACIÓN DE CARGA (FADE-IN CON RETARDO EN CASCADA) ==== */
+/* --------------------------------- */
+
+/* 1. Definimos la animación de la aparición */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Aplicamos la animación a la tarjeta */
+.card {
+  /* ... (Tus estilos existentes: transition, width, etc.) ... */
+  
+  /* Establecemos el estado inicial para que la animación funcione */
+  opacity: 0;
+  transform: translateY(20px);
+  
+  /* Aplicamos la animación */
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* 3. Creamos un retardo (delay) para cada tarjeta */
+/* Esto hace que aparezcan una tras otra (efecto cascada) */
+.movies-grid .card:nth-child(1) { animation-delay: 0.5s; } /* Empieza 0.5s después de la carga global */
+.movies-grid .card:nth-child(2) { animation-delay: 0.55s; }
+.movies-grid .card:nth-child(3) { animation-delay: 0.6s; }
+.movies-grid .card:nth-child(4) { animation-delay: 0.65s; }
+.movies-grid .card:nth-child(5) { animation-delay: 0.7s; }
+.movies-grid .card:nth-child(6) { animation-delay: 0.75s; }
+.movies-grid .card:nth-child(7) { animation-delay: 0.8s; }
+.movies-grid .card:nth-child(8) { animation-delay: 0.85s; }
+.movies-grid .card:nth-child(9) { animation-delay: 0.9s; }
+.movies-grid .card:nth-child(10) { animation-delay: 0.95s; }

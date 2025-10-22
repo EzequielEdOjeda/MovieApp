@@ -1,0 +1,300 @@
+/* src/index.css */
+
+/* === ¡NUEVO! Estilos para el video de fondo === */
+#bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: -1; /* Lo pone detrás de todo */
+  object-fit: cover; /* Asegura que cubra todo sin distorsionarse */
+}
+/* ======================================= */
+
+
+/* === MODIFICADO === */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  animation: globalFadeIn 1s ease-out forwards;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: transparent; 
+  background-color: transparent; /* AÑADIDO */
+  color: #333333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  background-color: #202124;
+  padding: 20px 0;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #E50914;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.search-bar {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.search-bar input {
+  width: 70%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+}
+
+.movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.movie {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+  cursor: pointer;
+}
+
+/* === ESTILOS DEL BOTÓN DE VOLUMEN === */
+.volume-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  /* Estilo visual */
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.5rem;
+  line-height: 45px; /* Centra el emoji */
+  text-align: center;
+  cursor: pointer;
+  z-index: 2001; /* Asegura que esté por encima de todo */
+  transition: opacity 0.3s, background-color 0.3s, visibility 0.3s; /* Añadimos transición para suavidad */
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  
+  /* CLAVE: ESTADO OCULTO POR DEFECTO */
+  opacity: 0;
+  visibility: hidden; 
+}
+
+/* CLAVE: ESTADO VISIBLE */
+.volume-toggle.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.volume-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.movie:hover {
+  box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+}
+
+.movie img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 15px;
+}
+
+.movie h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie .price {
+  font-size: 24px;
+  font-weight: 400;
+  color: #333333;
+}
+
+.movie button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #E50914;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.movie button:hover {
+  background-color: #B20710;
+}
+
+/* Estilos de Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: #FFFFFF;
+  color: #333333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.tab.active {
+  background-color: #E50914;
+  color: #FFFFFF;
+}
+
+/* Animación (Opcional pero incluida en el original) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+
+/* Estilos del Modal de Detalles */
+.movie-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.movie-details-content {
+  background-color: #FFFFFF;
+  padding: 30px;
+  border-radius: 6px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.movie-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.movie-details-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333333;
+  margin: 0;
+}
+
+.movie-details-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333333;
+}
+
+.movie-details-info {
+  display: flex;
+  gap: 20px;
+}
+
+.movie-details-poster {
+  flex: 0 0 200px;
+}
+
+.movie-details-poster img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.movie-details-text {
+  flex: 1;
+}
+
+.movie-details-overview {
+  margin-bottom: 20px;
+}
+
+.movie-details-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+}
+
+.movie-details-label {
+  font-weight: bold;
+}
+
+/* Media query para móviles (del original) */
+@media (max-width: 768px) {
+  .movie-details-info {
+    flex-direction: column;
+  }
+  .movie-details-poster {
+    flex: 0 0 auto;
+    width: 200px;
+    margin: 0 auto 20px;
+  }
+}
+
+/* --------------------------------- */
+/* ==== ANIMACIÓN GLOBAL (para NAVBAR y CONTAINER) ==== */
+/* --------------------------------- */
+
+@keyframes globalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
