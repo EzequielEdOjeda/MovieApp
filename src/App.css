@@ -136,8 +136,6 @@ body {
 
 /* 2. Aplicamos la animación a la tarjeta */
 .card {
-  /* ... (Tus estilos existentes: transition, width, etc.) ... */
-  
   /* Establecemos el estado inicial para que la animación funcione */
   opacity: 0;
   transform: translateY(20px);
