@@ -1,4 +1,4 @@
-# 🎬 MovieApp | Proyecto React (Informatorio - Entrega 1)
+# 🎬 MovieApp | Proyecto React
 
 Este es el proyecto base para el **Informatorio - Chaco** de la especialidad **React**. Se trata de una aplicación web minimalista para visualizar y gestionar un catálogo de películas y series, con un diseño inspirado en la estética moderna de plataformas de *streaming*.
 
