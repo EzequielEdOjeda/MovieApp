@@ -1,21 +1,53 @@
 # 🎬 MovieApp | Proyecto React 
 
-Este es el proyecto base para el **Informatorio - Chaco** de la especialidad **React**. Se trata de una aplicación web minimalista para visualizar y gestionar un catálogo de películas y series, con un diseño inspirado en la estética moderna de plataformas de *streaming*.
+Aplicación desarrollada para el **Informatorio - Chaco**, dentro de la especialidad **React**.  
+Se trata de una **web app moderna y responsiva** para explorar películas y series, con búsqueda, favoritos, modal informativo y un diseño inspirado en plataformas de *streaming*.
 
 ---
 
 ## ✨ Características Principales
 
-* **Tecnología Base:** Desarrollado con **Vite** y **React**.
-* **Diseño Modular:** Uso de **Componentes Funcionales** (`Navbar`, `MovieCard`, `Container`).
-* **Contenedores Reutilizables:** Implementación de un componente `Container` utilizando la prop `children`.
-* **Renderizado de Listas:** Se muestran las películas usando la función `map` de JavaScript para renderizar el listado.
-* **Estilos Personalizados:** Estilos CSS ajustados para lograr una coherencia visual simple y un diseño **responsivo** (adaptable a móvil/PC).
-* **Gestión de Datos:** Los datos de las películas se obtienen desde una API externa (The Movie Database - TMDB) usando **Axios**.
+### 🧩 Tecnología Base
+- Desarrollado con **React** y **Vite**.
+- Arquitectura modular basada en **componentes funcionales**.
+- Llamadas a la API con **Axios**.
+
+### 🎨 Diseño y UI
+- Diseño completamente **responsivo** (móvil / tablet / escritorio).
+- Navbar con menú hamburguesa animado.
+- Grid dinámico de tarjetas (5 por fila en escritorio).
+- Modal informativo con imagen, overview, fecha y rating.
+- Placeholder automático para imágenes faltantes.
+
+### 🔍 Búsqueda Inteligente
+- Búsqueda en:
+  - Películas  
+  - Series  
+  - Favoritos  
+- Filtrado en tiempo real según lo escrito.
+
+### ⭐ Sistema de Favoritos (localStorage)
+- Agregar o quitar favoritos desde:
+  - Las tarjetas (`MovieCard`)
+  - El modal de detalles
+- Favoritos persistentes mediante **localStorage**.
+- Sección dedicada para gestionar favoritos.
+- Permite abrir la información completa desde la sección Favoritos.
+
+### 📊 Lógica y Manejo de Datos
+- Hooks personalizados:
+  - `useMovies`
+  - `useSeries`
+  - `useFavorites`
+- Manejo de errores y estados:
+  - “Cargando…” centrado
+  - “No hay resultados”
+  - “No tienes favoritos aún”
+- Normalización de datos para unificar estructura entre Películas y Series.
 
 ---
 
-## 🛠️ Configuración y Uso
+## 📈 Configuración y Uso
 
 Para ejecutar el proyecto localmente, sigue estos pasos:
 
@@ -27,7 +59,11 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
     ```bash
     npm install
     ```
-3.  Inicia la aplicación en modo desarrollo:
+3.  Crear un archivo .env en la raíz del proyecto y agregar::
+    ```bash
+    VITE_API_KEY=TU_API_KEY_AQUI
+    ```
+4.  Inicia la aplicación en modo desarrollo:
     ```bash
     npm run dev
     ```
