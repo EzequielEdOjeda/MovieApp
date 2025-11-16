@@ -7,7 +7,7 @@ Se trata de una **web app moderna y responsiva** para explorar películas y seri
 
 ## ✨ Características Principales
 
-### 🧩 Tecnología Base
+### 💻 Tecnología Base
 - Desarrollado con **React** y **Vite**.
 - Arquitectura modular basada en **componentes funcionales**.
 - Llamadas a la API con **Axios**.
@@ -47,7 +47,7 @@ Se trata de una **web app moderna y responsiva** para explorar películas y seri
 
 ---
 
-## 📈 Configuración y Uso
+## 🌐 Configuración y Uso
 
 Para ejecutar el proyecto localmente, sigue estos pasos:
 
